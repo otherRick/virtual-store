@@ -1,9 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
+
 import { getAllCountries } from '../services/getAllCountries';
-import { Country } from '../services/getAllCountriesType';
+
+export interface HomeSliceData {
+  countryArea: number;
+  countryCapital: string;
+  countryCardPrice: string;
+  countryFlag: { alt: string; image: string };
+  countryName: string;
+  countrySpokenLanguages: string;
+  formattedCountryName: string;
+  countryId: string;
+}
 
 export interface HomeSliceInitialState {
-  data: Country[];
+  data: HomeSliceData[];
   controls: {
     status: 'PENDING' | 'FULLFILED' | 'REJECTED' | null;
     message: string | null;
@@ -20,11 +33,75 @@ const initialState: HomeSliceInitialState = {
 
 export const getAllCountriesThunk = createAsyncThunk(
   'home-slice/get-all-countries',
-  async (payload, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const res = await getAllCountries();
+      const { data } = await getAllCountries();
 
-      return res.data;
+      const formattedData = data.map(
+        ({
+          languages,
+          area,
+          capital,
+          flags,
+          name: { common },
+          translations,
+        }) => {
+          const countryId = uuidv4();
+          let languageAcronymList = null;
+          let formattedCountryName = '';
+          let countrySpokenLanguages = '';
+
+          if (languages) {
+            languageAcronymList = Object.keys(languages);
+
+            const nativeCountryName =
+              translations[languageAcronymList[0] as keyof typeof translations];
+
+            if (nativeCountryName?.common) {
+              const existNativeCountryName =
+                common === nativeCountryName?.common;
+
+              formattedCountryName = existNativeCountryName
+                ? common
+                : `${common} | ${nativeCountryName?.common}`;
+            } else {
+              formattedCountryName = common;
+            }
+
+            countrySpokenLanguages = languages
+              ? languageAcronymList
+                  .map((acronym, index) => {
+                    return `${languages[acronym as keyof typeof languages]}${
+                      index === languageAcronymList.length - 1 ? '' : ', '
+                    }`;
+                  })
+                  .join('')
+              : '';
+          }
+
+          const countryCapital = capital ? capital[0] : '';
+
+          const countryCardPrice = (Math.random() * 500 + 500)
+            .toFixed(2)
+            .replace('.', ',');
+
+          return {
+            countryArea: area,
+            countryFlag: {
+              alt: flags.alt,
+              image: flags.png,
+            },
+            countryName: common,
+            formattedCountryName,
+            countryCapital,
+            countrySpokenLanguages,
+            countryCardPrice,
+            countryId,
+          };
+        },
+      );
+
+      return formattedData;
     } catch (error) {
       return rejectWithValue(error);
     }

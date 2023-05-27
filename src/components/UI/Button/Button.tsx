@@ -1,9 +1,9 @@
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
 import { Text } from '../Text/Text';
 import { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native/types';
 
-export interface ButtonProps {
+export interface ButtonProps extends RectButtonProps {
   children?: ReactNode;
   variant?: 'default' | 'transparent';
   title?: string;
@@ -15,9 +15,10 @@ export const Button = ({
   children,
   variant = 'default',
   style,
+  ...rest
 }: ButtonProps) => {
   return (
-    <RectButton style={variant === 'transparent' ? style : {}}>
+    <RectButton {...rest} style={variant === 'transparent' ? style : {}}>
       {title ? <Text>{title}</Text> : children}
     </RectButton>
   );

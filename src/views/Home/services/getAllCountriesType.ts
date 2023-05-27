@@ -121,3 +121,14 @@ export type Country = {
 export type GetAllCountriesReturn = {
   data: Country[];
 };
+
+export interface FormattedCountryData {
+  countryArea: number;
+  countryCapital: string;
+  countryCardPrice: string;
+  countryFlag: { alt: string; image: string };
+  countryName: string;
+  countrySpokenLanguages: string;
+  formattedCountryName: string;
+  countryId: string;
+}

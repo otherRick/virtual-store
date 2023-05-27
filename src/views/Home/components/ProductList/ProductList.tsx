@@ -5,13 +5,21 @@ import { Store } from '../../../../store';
 import { Text } from '../../../../components/UI/Text/Text';
 import { Button } from '../../../../components/UI/Button/Button';
 import { MapPin } from 'phosphor-react-native';
+import { useAsyncDispatch } from '../../../../hooks/useAsyncDispatch';
+import { addProduct } from '../../../Cart/slice/cartSlice';
+import { FormattedCountryData } from '../../services/getAllCountriesType';
 
 export const ProductList = () => {
+  const dispatch = useAsyncDispatch();
   const { data } = useSelector(({ homeReducer }: Store) => homeReducer);
 
   if (!data) {
     return null;
   }
+
+  const onProductPress = (productData: FormattedCountryData) => {
+    dispatch(addProduct(productData));
+  };
 
   return (
     <ScrollView
@@ -20,55 +28,48 @@ export const ProductList = () => {
         justifyContent: 'center',
       }}
       showsHorizontalScrollIndicator={false}>
-      {data.map(
-        ({
-          countryArea,
-          countryCapital,
-          countryCardPrice,
-          countryFlag,
-          countrySpokenLanguages,
-          formattedCountryName,
-          countryId,
-        }) => (
-          <Button
-            variant="transparent"
+      {data.map(productData => (
+        <Button
+          onPress={() => onProductPress(productData)}
+          key={productData.countryId}
+          variant="transparent"
+          style={{
+            width: '100%',
+          }}>
+          <View
             style={{
-              width: '100%',
+              borderBottomWidth: 1,
+              flexDirection: 'row',
+              padding: 20,
             }}>
-            <View
-              key={countryId}
-              style={{
-                borderBottomWidth: 1,
-                flexDirection: 'row',
-                padding: 20,
-              }}>
-              <Image
-                resizeMode="contain"
-                source={{ uri: countryFlag.image, width: 100 }}
-                alt={countryFlag.alt}
-              />
-              <View>
-                <View style={{ flexDirection: 'row' }}>
-                  <Text numberOfLines={1}>{formattedCountryName}</Text>
-                </View>
-                <Text numberOfLines={1}>{countryCapital}</Text>
-                <View style={{ flexDirection: 'row' }}>
-                  <Text>{countrySpokenLanguages}</Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}>
-                  <MapPin />
-                  <Text>{countryArea}km²</Text>
-                </View>
-                <Text>R$: {countryCardPrice}</Text>
+            <Image
+              resizeMode="contain"
+              source={{ uri: productData.countryFlag.image, width: 100 }}
+              alt={productData.countryFlag.alt}
+            />
+            <View>
+              <View style={{ flexDirection: 'row' }}>
+                <Text numberOfLines={1}>
+                  {productData.formattedCountryName}
+                </Text>
               </View>
+              <Text numberOfLines={1}>{productData.countryCapital}</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Text>{productData.countrySpokenLanguages}</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                <MapPin />
+                <Text>{productData.countryArea}km²</Text>
+              </View>
+              <Text>R$: {productData.countryCardPrice}</Text>
             </View>
-          </Button>
-        ),
-      )}
+          </View>
+        </Button>
+      ))}
     </ScrollView>
   );
 };

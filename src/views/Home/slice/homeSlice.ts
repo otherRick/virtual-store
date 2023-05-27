@@ -3,20 +3,10 @@ import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 
 import { getAllCountries } from '../services/getAllCountries';
-
-export interface HomeSliceData {
-  countryArea: number;
-  countryCapital: string;
-  countryCardPrice: string;
-  countryFlag: { alt: string; image: string };
-  countryName: string;
-  countrySpokenLanguages: string;
-  formattedCountryName: string;
-  countryId: string;
-}
+import { FormattedCountryData } from '../services/getAllCountriesType';
 
 export interface HomeSliceInitialState {
-  data: HomeSliceData[];
+  data: FormattedCountryData[];
   controls: {
     status: 'PENDING' | 'FULLFILED' | 'REJECTED' | null;
     message: string | null;

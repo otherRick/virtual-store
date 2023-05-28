@@ -59,14 +59,14 @@ export const cartSlice = createSlice({
         product => product.countryId === action.payload.countryId,
       );
 
-      if (foundProductIndex) {
+      if (foundProductIndex !== -1) {
         const product = state.data[foundProductIndex];
 
-        if (product.quantity < 1) {
+        if (product.quantity <= 1) {
           state.data = removeProduct(state.data, action);
         }
 
-        product.quantity = product.quantity--;
+        product.quantity = product.quantity - 1;
       }
     },
     romoveProducts(state, action: Action) {

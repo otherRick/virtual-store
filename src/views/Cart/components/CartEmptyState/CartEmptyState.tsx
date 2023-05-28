@@ -11,7 +11,7 @@ export const CartEmptyState = () => {
   const { goBack } = useNavigation();
   const cartStore = useSelector((store: Store) => store.cartReducer);
 
-  if (cartStore.data.length !== 0) {
+  if (cartStore.characters.length !== 0) {
     return null;
   }
 

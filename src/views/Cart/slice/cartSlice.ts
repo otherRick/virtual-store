@@ -1,86 +1,88 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FormattedCountryData } from '../../Home/services/getAllCountriesType';
+import { FormattedCharacters } from '../../Home/services/getCharacters';
+import { HomeSliceData } from '../../Home/slice/homeSlice';
 
-export interface InicialStateData extends FormattedCountryData {
+export interface InicialStateData extends FormattedCharacters {
   quantity: number;
+  price: string;
 }
 
 export interface Action {
   type: string;
-  payload: FormattedCountryData;
+  payload: HomeSliceData;
 }
 
 export interface CartSliceInicialState {
-  data: InicialStateData[];
+  characters: InicialStateData[];
   controls: {
     state: null;
     message: null;
   };
 }
 const initialState: CartSliceInicialState = {
-  data: [],
+  characters: [],
   controls: {
     state: null,
     message: null,
   },
 };
 
-const removeProduct = (products: InicialStateData[], action: Action) => {
-  const filteredProducts = products.filter(
-    item => item.countryId !== action.payload.countryId,
+const removeCharacter = (characters: InicialStateData[], action: Action) => {
+  const filteredCharacter = characters.filter(
+    character => character.id !== action.payload.id,
   );
 
-  return filteredProducts;
+  return filteredCharacter;
 };
 
 export const cartSlice = createSlice({
   initialState,
   name: 'cart-slice',
   reducers: {
-    addProduct(state, action: Action) {
-      const foundProductIndex = state.data.findIndex(
-        product => product.countryId === action.payload.countryId,
+    addCharacter(state, action: Action) {
+      const foundCharacterIndex = state.characters.findIndex(
+        character => character.id === action.payload.id,
       );
 
-      if (foundProductIndex !== -1) {
-        const product = state.data[foundProductIndex];
+      if (foundCharacterIndex !== -1) {
+        const product = state.characters[foundCharacterIndex];
 
         product.quantity = product.quantity + 1;
         return;
       }
 
-      state.data.push({
+      state.characters.push({
         ...action.payload,
         quantity: 1,
       });
     },
-    removeProductQuantity(state, action: Action) {
-      const foundProductIndex = state.data.findIndex(
-        product => product.countryId === action.payload.countryId,
+    removeCharacterQuantity(state, action: Action) {
+      const foundCharacterIndex = state.characters.findIndex(
+        character => character.id === action.payload.id,
       );
 
-      if (foundProductIndex !== -1) {
-        const product = state.data[foundProductIndex];
+      if (foundCharacterIndex !== -1) {
+        const character = state.characters[foundCharacterIndex];
 
-        if (product.quantity <= 1) {
-          state.data = removeProduct(state.data, action);
+        if (character.quantity <= 1) {
+          state.characters = removeCharacter(state.characters, action);
         }
 
-        product.quantity = product.quantity - 1;
+        character.quantity = character.quantity - 1;
       }
     },
-    romoveProducts(state, action: Action) {
-      state.data = removeProduct(state.data, action);
+    romoveCharacter(state, action: Action) {
+      state.characters = removeCharacter(state.characters, action);
     },
-    removeAllProdcuts(state) {
-      state.data = [];
+    removeAllCharacters(state) {
+      state.characters = [];
     },
   },
 });
 
 export const {
-  addProduct,
-  removeAllProdcuts,
-  removeProductQuantity,
-  romoveProducts,
+  addCharacter,
+  removeAllCharacters,
+  removeCharacterQuantity,
+  romoveCharacter,
 } = cartSlice.actions;

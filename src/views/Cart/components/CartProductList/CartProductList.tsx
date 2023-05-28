@@ -1,19 +1,21 @@
 import { Alert, Image, ScrollView, View } from 'react-native';
-import { Text } from '../../../../components/UI/Text/Text';
-import { useSelector } from 'react-redux';
-import { Store } from '../../../../store';
 import { Trash } from 'phosphor-react-native';
+import { useSelector } from 'react-redux';
+
+import { Text } from '../../../../components/UI/Text/Text';
+import { Store } from '../../../../store';
 import { QuantitySelector } from './components/QuantitySelector/QuantitySelector';
 import { Button } from '../../../../components/UI/Button/Button';
 import { useAsyncDispatch } from '../../../../hooks/useAsyncDispatch';
-import { removeAllProdcuts } from '../../slice/cartSlice';
+import { removeAllCharacters } from '../../slice/cartSlice';
+
 import styles from './styles';
 
 export const CartProductList = () => {
   const cartStore = useSelector((store: Store) => store.cartReducer);
   const dispatch = useAsyncDispatch();
 
-  if (cartStore.data.length === 0) {
+  if (cartStore.characters.length === 0) {
     return null;
   }
 
@@ -26,7 +28,7 @@ export const CartProductList = () => {
           text: 'Cancel',
         },
         {
-          onPress: () => dispatch(removeAllProdcuts()),
+          onPress: () => dispatch(removeAllCharacters()),
           text: 'Confirm',
         },
       ],
@@ -36,15 +38,14 @@ export const CartProductList = () => {
   return (
     <ScrollView>
       <Text>My list</Text>
-      {cartStore.data.map(data => (
-        <View key={data.countryId} style={styles.list}>
+      {cartStore.characters.map(character => (
+        <View key={character.id} style={styles.list}>
           <Image
-            source={{ uri: data.countryFlag.image, width: 100 }}
-            alt={data.countryFlag.alt}
+            source={{ uri: character.image, width: 100 }}
             resizeMode="contain"
           />
-          <Text>{data.countryName}</Text>
-          <QuantitySelector productData={data} />
+          <Text>{character.name}</Text>
+          <QuantitySelector {...{ character }} />
         </View>
       ))}
       <Button onPress={onRemoveAllPress}>

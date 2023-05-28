@@ -5,41 +5,41 @@ import { Button } from '../../../../../../components/UI/Button/Button';
 import { useAsyncDispatch } from '../../../../../../hooks/useAsyncDispatch';
 import {
   InicialStateData,
-  addProduct,
-  removeProductQuantity,
+  addCharacter,
+  removeCharacterQuantity,
+  romoveCharacter,
 } from '../../../../slice/cartSlice';
-import { romoveProducts } from '../../../../slice/cartSlice';
 import styles from './styles';
 
 export interface QuantitySelectorProps {
-  productData: InicialStateData;
+  character: InicialStateData;
 }
 
-export const QuantitySelector = ({ productData }: QuantitySelectorProps) => {
+export const QuantitySelector = ({ character }: QuantitySelectorProps) => {
   const dispatch = useAsyncDispatch();
-  const onRemove = () => {
-    dispatch(removeProductQuantity(productData));
+  const onRemoveCharacter = () => {
+    dispatch(removeCharacterQuantity(character));
   };
-  const onAdd = () => {
-    dispatch(addProduct(productData));
+  const onAddCharacter = () => {
+    dispatch(addCharacter(character));
   };
 
-  const onRemoveProductPress = () => {
-    dispatch(romoveProducts(productData));
+  const onRemoveAllCharacters = () => {
+    dispatch(romoveCharacter(character));
   };
   return (
     <View>
       <View style={styles.container}>
-        <Button onPress={onRemove}>
+        <Button onPress={onRemoveCharacter}>
           <Minus size={20} />
         </Button>
-        <Text>{productData.quantity}</Text>
-        <Button onPress={onAdd}>
+        <Text>{character.quantity}</Text>
+        <Button onPress={onAddCharacter}>
           <Plus size={20} />
         </Button>
       </View>
       <Button
-        onPress={onRemoveProductPress}
+        onPress={onRemoveAllCharacters}
         variant="transparent"
         style={styles.remove}>
         <Text>Remove</Text>

@@ -12,7 +12,7 @@ export interface HeaderProps {
 }
 
 export const Header = ({ renderItem }: HeaderProps) => {
-  const { data } = useSelector((store: Store) => store.cartReducer);
+  const { characters } = useSelector((store: Store) => store.cartReducer);
   const { navigate } = useNavigation();
 
   return (
@@ -21,7 +21,7 @@ export const Header = ({ renderItem }: HeaderProps) => {
       <Button onPress={() => navigate(HOME_STACK.CART as never)}>
         <View>
           <ShoppingCart />
-          {data.length === 0 ? null : <View style={stlyles.cartRedDot} />}
+          {characters.length === 0 ? null : <View style={stlyles.cartRedDot} />}
         </View>
       </Button>
     </View>

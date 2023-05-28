@@ -1,12 +1,23 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
 
-import { getAllCountries } from '../services/getAllCountries';
-import { FormattedCountryData } from '../services/getAllCountriesType';
+import {
+  FormattedCharacters,
+  Info,
+  getCharacters,
+} from '../services/getCharacters';
+
+export interface HomeSliceData extends FormattedCharacters {
+  price: string;
+}
+
+export interface getCharactersThunkPayload {
+  page: number;
+}
 
 export interface HomeSliceInitialState {
-  data: FormattedCountryData[];
+  charaters: HomeSliceData[];
+  info: Info;
   controls: {
     status: 'PENDING' | 'FULLFILED' | 'REJECTED' | null;
     message: string | null;
@@ -14,84 +25,36 @@ export interface HomeSliceInitialState {
 }
 
 const initialState: HomeSliceInitialState = {
-  data: [],
+  charaters: [],
+  info: {
+    pages: 0,
+    next: null,
+    prev: null,
+  },
   controls: {
     status: null,
     message: null,
   },
 };
 
-export const getAllCountriesThunk = createAsyncThunk(
-  'home-slice/get-all-countries',
-  async (_, { rejectWithValue }) => {
+export const getCharactersThunk = createAsyncThunk(
+  'home-slice/get-characters',
+  async (payload: getCharactersThunkPayload, { rejectWithValue }) => {
     try {
-      const { data } = await getAllCountries();
+      const { data } = await getCharacters(payload.page);
+      const formattedCharacters = data.results.map(character => ({
+        id: character.id,
+        status: character.status,
+        gender: character.gender,
+        image: character.image,
+        name: character.name,
+        species: character.species,
+        price: Math.floor(Math.random() * 500 + 500)
+          .toFixed(2)
+          .replace('.', ','),
+      }));
 
-      const formattedData = data.map(
-        ({
-          languages,
-          area,
-          capital,
-          flags,
-          name: { common },
-          translations,
-        }) => {
-          const countryId = uuidv4();
-          let languageAcronymList = null;
-          let formattedCountryName = '';
-          let countrySpokenLanguages = '';
-
-          if (languages) {
-            languageAcronymList = Object.keys(languages);
-
-            const nativeCountryName =
-              translations[languageAcronymList[0] as keyof typeof translations];
-
-            if (nativeCountryName?.common) {
-              const existNativeCountryName =
-                common === nativeCountryName?.common;
-
-              formattedCountryName = existNativeCountryName
-                ? common
-                : `${common} | ${nativeCountryName?.common}`;
-            } else {
-              formattedCountryName = common;
-            }
-
-            countrySpokenLanguages = languages
-              ? languageAcronymList
-                  .map((acronym, index) => {
-                    return `${languages[acronym as keyof typeof languages]}${
-                      index === languageAcronymList.length - 1 ? '' : ', '
-                    }`;
-                  })
-                  .join('')
-              : '';
-          }
-
-          const countryCapital = capital ? capital[0] : '';
-
-          const countryCardPrice = (Math.random() * 500 + 500)
-            .toFixed(2)
-            .replace('.', ',');
-
-          return {
-            countryArea: area,
-            countryFlag: {
-              alt: flags.alt,
-              image: flags.png,
-            },
-            countryName: common,
-            formattedCountryName,
-            countryCapital,
-            countrySpokenLanguages,
-            countryCardPrice,
-            countryId,
-          };
-        },
-      );
-
-      return formattedData;
+      return { characters: formattedCharacters, info: data.info };
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -103,16 +66,21 @@ export const homeSlice = createSlice({
   name: 'home-slice',
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(getAllCountriesThunk.fulfilled, (state, action) => {
-      state.data = action.payload;
+    builder.addCase(getCharactersThunk.fulfilled, (state, action) => {
+      action.payload.characters.forEach(character =>
+        state.charaters.push(character),
+      );
+
+      state.info = action.payload.info;
+
       state.controls.status = 'FULLFILED';
     });
 
-    builder.addCase(getAllCountriesThunk.pending, state => {
+    builder.addCase(getCharactersThunk.pending, state => {
       state.controls.status = 'PENDING';
     });
 
-    builder.addCase(getAllCountriesThunk.rejected, (state, action) => {
+    builder.addCase(getCharactersThunk.rejected, (state, action) => {
       const { message } = action.payload as { message: string };
 
       state.controls = {

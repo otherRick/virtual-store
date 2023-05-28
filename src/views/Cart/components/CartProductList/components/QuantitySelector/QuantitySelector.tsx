@@ -9,6 +9,7 @@ import {
   removeProductQuantity,
 } from '../../../../slice/cartSlice';
 import { romoveProducts } from '../../../../slice/cartSlice';
+import styles from './styles';
 
 export interface QuantitySelectorProps {
   productData: InicialStateData;
@@ -28,7 +29,7 @@ export const QuantitySelector = ({ productData }: QuantitySelectorProps) => {
   };
   return (
     <View>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View style={styles.container}>
         <Button onPress={onRemove}>
           <Minus size={20} />
         </Button>
@@ -40,7 +41,7 @@ export const QuantitySelector = ({ productData }: QuantitySelectorProps) => {
       <Button
         onPress={onRemoveProductPress}
         variant="transparent"
-        style={{ flexDirection: 'row' }}>
+        style={styles.remove}>
         <Text>Remove</Text>
         <Trash />
       </Button>

@@ -7,6 +7,7 @@ import { QuantitySelector } from './components/QuantitySelector/QuantitySelector
 import { Button } from '../../../../components/UI/Button/Button';
 import { useAsyncDispatch } from '../../../../hooks/useAsyncDispatch';
 import { removeAllProdcuts } from '../../slice/cartSlice';
+import styles from './styles';
 
 export const CartProductList = () => {
   const cartStore = useSelector((store: Store) => store.cartReducer);
@@ -36,12 +37,7 @@ export const CartProductList = () => {
     <ScrollView>
       <Text>My list</Text>
       {cartStore.data.map(data => (
-        <View
-          key={data.countryId}
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
+        <View key={data.countryId} style={styles.list}>
           <Image
             source={{ uri: data.countryFlag.image, width: 100 }}
             alt={data.countryFlag.alt}

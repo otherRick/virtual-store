@@ -7,6 +7,7 @@ import { useAsyncDispatch } from '../../hooks/useAsyncDispatch';
 import { HomeLoading } from './components/HomeLoading/HomeLoading';
 import { HomeError } from './components/HomeError/HomeError';
 import { ProductList } from './components/ProductList/ProductList';
+import styles from './styles';
 
 export const Home = () => {
   const dispatch = useAsyncDispatch();
@@ -16,7 +17,7 @@ export const Home = () => {
   }, [dispatch]);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <Header />
       <HomeLoading />
       <HomeError />

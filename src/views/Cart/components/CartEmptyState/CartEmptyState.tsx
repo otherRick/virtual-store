@@ -5,6 +5,7 @@ import { Store } from '../../../../store';
 import { SmileySad } from 'phosphor-react-native';
 import { Button } from '../../../../components/UI/Button/Button';
 import { useNavigation } from '@react-navigation/native';
+import styles from './styles';
 
 export const CartEmptyState = () => {
   const { goBack } = useNavigation();
@@ -15,7 +16,7 @@ export const CartEmptyState = () => {
   }
 
   return (
-    <View style={{ alignItems: 'center' }}>
+    <View style={styles.cartEmptyStateContainer}>
       <Text>Empty State</Text>
       <SmileySad />
       <Button onPress={() => goBack()}>

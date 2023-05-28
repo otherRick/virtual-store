@@ -2,7 +2,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeStackNavigator } from '../../views/Home/navigation';
 import { PRIVATE_STACK } from './constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Header } from '../../components/Header/Header';
 
 const Stack = createNativeStackNavigator();
 

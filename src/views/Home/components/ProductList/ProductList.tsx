@@ -8,6 +8,7 @@ import { MapPin } from 'phosphor-react-native';
 import { useAsyncDispatch } from '../../../../hooks/useAsyncDispatch';
 import { addProduct } from '../../../Cart/slice/cartSlice';
 import { FormattedCountryData } from '../../services/getAllCountriesType';
+import styles from './styles';
 
 export const ProductList = () => {
   const dispatch = useAsyncDispatch();
@@ -23,45 +24,31 @@ export const ProductList = () => {
 
   return (
     <ScrollView
-      contentContainerStyle={{
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
+      contentContainerStyle={styles.container}
       showsHorizontalScrollIndicator={false}>
       {data.map(productData => (
         <Button
           onPress={() => onProductPress(productData)}
           key={productData.countryId}
           variant="transparent"
-          style={{
-            width: '100%',
-          }}>
-          <View
-            style={{
-              borderBottomWidth: 1,
-              flexDirection: 'row',
-              padding: 20,
-            }}>
+          style={styles.button}>
+          <View style={styles.card}>
             <Image
               resizeMode="contain"
               source={{ uri: productData.countryFlag.image, width: 100 }}
               alt={productData.countryFlag.alt}
             />
             <View>
-              <View style={{ flexDirection: 'row' }}>
+              <View style={styles.name}>
                 <Text numberOfLines={1}>
                   {productData.formattedCountryName}
                 </Text>
               </View>
               <Text numberOfLines={1}>{productData.countryCapital}</Text>
-              <View style={{ flexDirection: 'row' }}>
+              <View style={styles.lenguage}>
                 <Text>{productData.countrySpokenLanguages}</Text>
               </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
+              <View style={styles.area}>
                 <MapPin />
                 <Text>{productData.countryArea}km²</Text>
               </View>

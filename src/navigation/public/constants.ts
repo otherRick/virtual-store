@@ -1,0 +1,4 @@
+export enum PUBLIC_STACK {
+  DEV = 'DEV_VIEW',
+  STORYBOOK = 'STORYBOOK',
+}

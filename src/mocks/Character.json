@@ -1,0 +1,9 @@
+{
+  "id": 361,
+  "name": "Toxic Rick",
+  "status": "Dead",
+  "species": "Humanoid",
+  "gender": "Male",
+  "price": "100.99",
+  "image": "https://rickandmortyapi.com/api/character/avatar/361.jpeg"
+}

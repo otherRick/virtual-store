@@ -11,7 +11,7 @@ import { removeAllCharacters } from '../../slice/cartSlice';
 
 import styles from './styles';
 
-export const CartProductList = () => {
+export const CartCharacterList = () => {
   const cartStore = useSelector((store: Store) => store.cartReducer);
   const dispatch = useAsyncDispatch();
 

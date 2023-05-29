@@ -10,7 +10,7 @@ export const Cart = () => {
   const { goBack } = useNavigation();
 
   return (
-    <View>
+    <View testID="cart-view">
       <Header
         renderItem={
           <Button onPress={() => goBack()}>

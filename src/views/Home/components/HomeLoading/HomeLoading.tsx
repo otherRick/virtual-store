@@ -8,13 +8,13 @@ export const HomeLoading = () => {
     controls: { status },
   } = useSelector(({ homeReducer }: Store) => homeReducer);
 
-  if (status !== 'PENDING') {
-    return null;
+  if (status === 'PENDING') {
+    return (
+      <View testID="home-loading-component">
+        <Text>Loading</Text>
+      </View>
+    );
   }
 
-  return (
-    <View>
-      <Text>Loading</Text>
-    </View>
-  );
+  return null;
 };

@@ -22,6 +22,7 @@ export const Character = ({ character }: RenderItemProps) => {
 
   return (
     <Button
+      testID="home-addCharacter-button"
       onPress={() => onAddCharaterToCart(character)}
       key={character.id}
       variant="transparent"

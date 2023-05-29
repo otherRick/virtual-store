@@ -23,12 +23,13 @@ export const CharacterList = () => {
     dispatch(getCharactersThunk({ page }));
   }, [dispatch, page]);
 
-  if (!charaters) {
+  if (charaters.length === 0) {
     return null;
   }
 
   return (
     <FlatList
+      testID="home-character-list-components"
       ListFooterComponent={<ListFooter currentPage={page} />}
       contentContainerStyle={styles.container}
       showsHorizontalScrollIndicator={false}

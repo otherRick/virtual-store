@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import { Button } from '../UI/Button/Button';
 import { Store } from '../../store';
 import { PRIVATE_STACK } from '../../navigation/private/constants';
-import { NAVIGATOR_STACK } from '../../navigation/constants';
 
 import stlyles from './stlyles';
 
@@ -20,20 +19,16 @@ export const Header = ({ renderItem }: HeaderProps) => {
   const { navigate } = useNavigation();
 
   return (
-    <View style={stlyles.headerContainer}>
+    <View testID="header-component" style={stlyles.headerContainer}>
       <View>{renderItem}</View>
       <Button
-        onPress={() =>
-          navigate(
-            NAVIGATOR_STACK.PRIVATE as never,
-            {
-              screen: PRIVATE_STACK.CART,
-            } as never,
-          )
-        }>
+        testID="header-cart-button"
+        onPress={() => navigate(PRIVATE_STACK.CART as never)}>
         <View>
           <ShoppingCart />
-          {characters.length === 0 ? null : <View style={stlyles.cartRedDot} />}
+          {characters.length === 0 ? null : (
+            <View testID="cart-red-dot" style={stlyles.cartRedDot} />
+          )}
         </View>
       </Button>
     </View>

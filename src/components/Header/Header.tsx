@@ -4,7 +4,7 @@ import { ShoppingCart } from 'phosphor-react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 
-// import { Button } from '../UI/Button/Button';
+import { Button } from '../UI/Button/Button';
 import { Store } from '../../store';
 import { PRIVATE_STACK } from '../../navigation/private/constants';
 import { NAVIGATOR_STACK } from '../../navigation/constants';
@@ -22,7 +22,7 @@ export const Header = ({ renderItem }: HeaderProps) => {
   return (
     <View style={stlyles.headerContainer}>
       <View>{renderItem}</View>
-      {/* <Button
+      <Button
         onPress={() =>
           navigate(
             NAVIGATOR_STACK.PRIVATE as never,
@@ -35,7 +35,7 @@ export const Header = ({ renderItem }: HeaderProps) => {
           <ShoppingCart />
           {characters.length === 0 ? null : <View style={stlyles.cartRedDot} />}
         </View>
-      </Button> */}
+      </Button>
     </View>
   );
 };

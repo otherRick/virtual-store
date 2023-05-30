@@ -1,5 +1,10 @@
 import { Image, View } from 'react-native';
-import { MapPin } from 'phosphor-react-native';
+import {
+  GenderFemale,
+  GenderMale,
+  GenderNeuter,
+  MapPin,
+} from 'phosphor-react-native';
 
 import { Button } from '../../../../../../components/UI/Button/Button';
 import { HomeSliceData } from '../../../../slice/homeSlice';
@@ -33,18 +38,29 @@ export const Character = ({ character }: RenderItemProps) => {
           source={{ uri: character.image, width: 100 }}
         />
         <View>
-          <View style={styles.name}>
-            <Text numberOfLines={1}>{character.name}</Text>
+          <View style={styles.nameContainer}>
+            <Text style={styles.name} numberOfLines={1}>
+              {character.name}
+            </Text>
           </View>
-          <Text numberOfLines={1}>{character.species}</Text>
-          <View style={styles.lenguage}>
+          <View style={styles.genderContainer}>
+            {character.gender === 'Female' ? (
+              <GenderFemale size={15} />
+            ) : (
+              <GenderMale size={15} />
+            )}
             <Text>{character.gender}</Text>
           </View>
-          <View style={styles.area}>
-            <MapPin />
-            <Text>{character.status}</Text>
+          <Text
+            style={character.species === 'Human' ? styles.human : styles.alien}>
+            {character.species}
+          </Text>
+          <View style={styles.genderContainer}>
+            <Text style={styles.status}>{character.status}</Text>
           </View>
-          <Text>R$: {character.price}</Text>
+        </View>
+        <View style={styles.sellerPriceContainer}>
+          <Text style={styles.sellerPriceText}>${character.price}</Text>
         </View>
       </View>
     </Button>

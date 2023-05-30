@@ -3,12 +3,13 @@ import { Button } from '../../components/UI/Button/Button';
 import { Text } from '../../components/UI/Text/Text';
 import { useNavigation } from '@react-navigation/native';
 import { PUBLIC_STACK } from '../../navigation/public/constants';
+import { NAVIGATOR_STACK } from '../../navigation/constants';
 
 export const Dev = () => {
   const { navigate } = useNavigation();
 
   const goToApp = () => {
-    navigate(PUBLIC_STACK.PRIVATE_STACK as never);
+    navigate(NAVIGATOR_STACK.PRIVATE as never);
   };
 
   const goToStorybook = () => {

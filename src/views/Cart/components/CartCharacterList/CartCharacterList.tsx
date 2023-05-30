@@ -36,21 +36,25 @@ export const CartCharacterList = () => {
   };
 
   return (
-    <ScrollView>
-      <Text>My list</Text>
+    <ScrollView contentContainerStyle={styles.container}>
       {cartStore.characters.map(character => (
         <View key={character.id} style={styles.list}>
           <Image
-            source={{ uri: character.image, width: 100 }}
+            style={styles.image}
+            source={{ uri: character.image, width: 70, height: 70 }}
             resizeMode="contain"
           />
-          <Text>{character.name}</Text>
+          <View style={styles.nameContainer}>
+            <Text style={styles.name}>{character.name}</Text>
+          </View>
           <QuantitySelector {...{ character }} />
         </View>
       ))}
       <Button onPress={onRemoveAllPress}>
-        <Text>Remove All Items</Text>
-        <Trash />
+        <View style={styles.removeButton}>
+          <Text>Clean Cart</Text>
+          <Trash size={50} color="red" />
+        </View>
       </Button>
     </ScrollView>
   );

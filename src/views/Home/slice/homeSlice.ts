@@ -49,9 +49,7 @@ export const getCharactersThunk = createAsyncThunk(
         image: character.image,
         name: character.name,
         species: character.species,
-        price: Math.floor(Math.random() * 500 + 500)
-          .toFixed(2)
-          .replace('.', ','),
+        price: Math.floor(Math.random() * 100 + 2).toFixed(2),
       }));
 
       return { characters: formattedCharacters, info: data.info };

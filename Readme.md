@@ -37,9 +37,9 @@ Clicando no ícone do carrinho no header da view, você será redirecionado para
 
 Caso não haja nenhum item no carrinho, uma mensagem te orientará a voltar à view "Home", dando reinício a todo o processo.
 
-## Features desejadas e não implementadas
+## O que eu gostaria de ter implementado a mais.
 
-Apesar de ter todas as funcionalidades requeridas em funcionamento, assim como o seu teste e Storybook, ainda há algumas features que estavam no planejamento do app e não foram implementadas. São elas:
+Apesar de ter todas as funcionalidades requeridas em implementadas, segue umas lista de features que eu gostaria de ter adicionado:
 
 - Um search bar na header da view "Home", onde o usuário poderia escolher um personagem específico através de alguns filtros.
 - Ter um total geral da compra.

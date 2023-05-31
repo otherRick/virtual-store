@@ -28,7 +28,7 @@ export const QuantitySelector = ({ character }: QuantitySelectorProps) => {
     dispatch(romoveCharacter(character));
   };
 
-  const totalPrice = (Number(character.price) * character.quantity)
+  const totalPrice = (Number(character?.price) * character?.quantity)
     .toFixed(2)
     .replace(',', '.');
 
@@ -40,7 +40,7 @@ export const QuantitySelector = ({ character }: QuantitySelectorProps) => {
             <Minus size={20} />
           </Button>
         </View>
-        <Text style={styles.selectorNumber}>{character.quantity}</Text>
+        <Text style={styles.selectorNumber}>{character?.quantity}</Text>
         <View style={styles.quantitySelector}>
           <Button onPress={onAddCharacter}>
             <Plus size={20} />

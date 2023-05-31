@@ -28,7 +28,7 @@ export const Header = ({ renderItem, title }: HeaderProps) => {
         testID="header-cart-button"
         onPress={() => navigate(PRIVATE_STACK.CART as never)}>
         <View>
-          <ShoppingCart />
+          <ShoppingCart style={stlyles.cart} />
           {characters.length === 0 ? null : (
             <View testID="cart-red-dot" style={stlyles.cartRedDot}>
               <Text style={stlyles.numberOfItems}>{characters.length}</Text>

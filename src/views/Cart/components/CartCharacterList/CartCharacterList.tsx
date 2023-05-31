@@ -50,6 +50,8 @@ export const CartCharacterList = () => {
           <QuantitySelector {...{ character }} />
         </View>
       ))}
+
+      <Text style={{ color: 'blue' }}>{cartStore.totalPrice} </Text>
       <Button onPress={onRemoveAllPress}>
         <View style={styles.removeButton}>
           <Text>Clean Cart</Text>

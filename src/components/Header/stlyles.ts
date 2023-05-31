@@ -18,9 +18,10 @@ export default StyleSheet.create({
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    top: -5,
-    right: -5,
+    top: 0,
+    right: 0,
   },
+  cart: { marginRight: 4 },
   numberOfItems: {
     fontSize: 10,
     marginLeft: 1,

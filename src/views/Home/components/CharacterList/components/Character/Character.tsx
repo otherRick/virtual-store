@@ -1,10 +1,5 @@
 import { Image, View } from 'react-native';
-import {
-  GenderFemale,
-  GenderMale,
-  GenderNeuter,
-  MapPin,
-} from 'phosphor-react-native';
+import { GenderFemale, GenderMale } from 'phosphor-react-native';
 
 import { Button } from '../../../../../../components/UI/Button/Button';
 import { HomeSliceData } from '../../../../slice/homeSlice';

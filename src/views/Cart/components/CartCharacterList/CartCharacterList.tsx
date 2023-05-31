@@ -51,13 +51,14 @@ export const CartCharacterList = () => {
         </View>
       ))}
 
-      <Text style={{ color: 'blue' }}>{cartStore.totalPrice} </Text>
-      <Button onPress={onRemoveAllPress}>
-        <View style={styles.removeButton}>
-          <Text>Clean Cart</Text>
-          <Trash size={50} color="red" />
-        </View>
-      </Button>
+      <View style={styles.removeButton}>
+        <Button variant="transparent" onPress={onRemoveAllPress}>
+          <View style={styles.removeButtonText}>
+            <Text>Clean Cart</Text>
+            <Trash size={50} color="red" />
+          </View>
+        </Button>
+      </View>
     </ScrollView>
   );
 };

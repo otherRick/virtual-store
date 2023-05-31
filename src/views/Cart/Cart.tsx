@@ -16,7 +16,7 @@ export const Cart = () => {
       <Header
         title={<Text style={styles.title}>My Shop</Text>}
         renderItem={
-          <Button onPress={() => goBack()}>
+          <Button variant="transparent" onPress={() => goBack()}>
             <ArrowLeft />
           </Button>
         }

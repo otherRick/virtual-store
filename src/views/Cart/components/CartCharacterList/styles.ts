@@ -43,4 +43,5 @@ export default StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
+  removeButtonText: { alignItems: 'center' },
 });

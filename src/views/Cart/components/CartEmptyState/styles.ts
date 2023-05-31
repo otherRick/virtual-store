@@ -17,17 +17,4 @@ export default StyleSheet.create({
   smileyIcon: {
     marginBottom: 40,
   },
-  button: {
-    backgroundColor: '#3333',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 100,
-  },
-  buttonText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    padding: 10,
-    color: '#333333',
-    textAlign: 'center',
-  },
 });

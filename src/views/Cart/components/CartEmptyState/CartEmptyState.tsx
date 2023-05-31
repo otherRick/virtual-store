@@ -20,8 +20,8 @@ export const CartEmptyState = () => {
       <Text style={styles.emptyStateText}>No items!</Text>
       <SmileySad style={styles.smileyIcon} size={50} />
       <Button onPress={() => goBack()}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Go back and bring something</Text>
+        <View>
+          <Text>Go back and bring something</Text>
         </View>
       </Button>
     </View>

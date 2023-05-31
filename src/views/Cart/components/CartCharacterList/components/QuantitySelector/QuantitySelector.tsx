@@ -36,13 +36,13 @@ export const QuantitySelector = ({ character }: QuantitySelectorProps) => {
     <View style={styles.container}>
       <View style={styles.selectorContainer}>
         <View style={styles.quantitySelector}>
-          <Button onPress={onRemoveCharacter}>
+          <Button variant="transparent" onPress={onRemoveCharacter}>
             <Minus size={20} />
           </Button>
         </View>
         <Text style={styles.selectorNumber}>{character?.quantity}</Text>
         <View style={styles.quantitySelector}>
-          <Button onPress={onAddCharacter}>
+          <Button variant="transparent" onPress={onAddCharacter}>
             <Plus size={20} />
           </Button>
         </View>

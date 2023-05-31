@@ -25,6 +25,7 @@ export const Header = ({ renderItem, title }: HeaderProps) => {
       <View>{renderItem}</View>
       <View>{title}</View>
       <Button
+        variant="transparent"
         testID="header-cart-button"
         onPress={() => navigate(PRIVATE_STACK.CART as never)}>
         <View>

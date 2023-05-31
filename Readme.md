@@ -43,6 +43,8 @@ Apesar de ter todas as funcionalidades requeridas em implementadas, segue umas l
 
 - Um search bar na header da view "Home", onde o usuário poderia escolher um personagem específico através de alguns filtros.
 - Ter um total geral da compra.
+- Gostaria de por mais costumização nos componentes (styles, props...).
+- Adicionar fontes costumizadas.
 - Modal que se abriria quando um personagem fosse clicado mostra todos os detalhes vindos da API e opção de por no carrinho ou favoritar.
 - Todos os componentes testados.
 - Estender as configuração default do ESLint.
